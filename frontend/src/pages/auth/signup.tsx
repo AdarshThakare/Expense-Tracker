@@ -27,6 +27,7 @@ const SignUp = () => {
   const { updateUser } = userContext;
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
+    let profileImageUrl = "";
     e.preventDefault();
 
     if (!fullName) {
@@ -48,8 +49,6 @@ const SignUp = () => {
 
     //SignUp API Call
     try {
-      let profileImageUrl = "";
-
       // Upload Image
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
@@ -59,6 +58,7 @@ const SignUp = () => {
         fullName,
         email,
         password,
+        profileImageUrl,
       });
 
       const { token, user } = response.data;
