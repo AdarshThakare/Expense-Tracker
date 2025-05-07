@@ -28,7 +28,6 @@ const SignUp = () => {
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter your name");
@@ -49,6 +48,8 @@ const SignUp = () => {
 
     //SignUp API Call
     try {
+      let profileImageUrl = "";
+
       // Upload Image
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
