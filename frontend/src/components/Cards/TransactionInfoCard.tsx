@@ -20,19 +20,23 @@ const TransactionInfoCard = ({
   return (
     <div
       key={title}
-      className="group relative flex items-center gap-4 p-3 rounded-lg hover:bg-gray-100/60"
+      className="group relative flex items-center gap-4 max-md:pb-5 md:p-3 rounded-lg hover:bg-gray-100/60"
     >
-      <div className="size-12 flex items-center justify-center text-xl text-gray-800 bg-fuchsia-100 rounded-full">
+      <div className="size-9 md:size-12 flex items-center justify-center text-xl text-gray-800 bg-fuchsia-100 rounded-full">
         {icon ? (
-          <img src={icon} alt={title} className="size-6" />
+          <img src={icon} alt={title} className="max-md:size-4 md:size-6" />
         ) : (
-          <LuUtensils />
+          <LuUtensils className="max-md:size-4 md:size-6" />
         )}
       </div>
       <div className="flex-1 flex items-center justify-between">
         <div>
-          <p className="text-md text-gray-700 font-medium">{title}</p>
-          <p className="text-sm text-gray-500 mt-1 font-mono">{date}</p>
+          <p className="max-md:text-sm md:text-md text-gray-700 font-medium">
+            {title}
+          </p>
+          <p className="max-md:text-xs md:text-sm text-gray-500 mt-1 font-mono">
+            {date}
+          </p>
         </div>
       </div>
 
@@ -47,9 +51,9 @@ const TransactionInfoCard = ({
         )}
 
         <div
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}
+          className={`flex items-center gap-1 md:gap-2 max-md:px-2 md:px-3 py-1.5 rounded-md ${getAmountStyles()}`}
         >
-          <h6 className="text-md font-medium">
+          <h6 className="max-md:text-sm md:text-md font-medium">
             {type === "income" ? "+" : "-"} ${amount}
           </h6>
           {type === "income" ? (

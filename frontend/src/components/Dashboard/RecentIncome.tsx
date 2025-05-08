@@ -9,7 +9,7 @@ interface RecentIncomeProps {
 
 const RecentIncome = ({ transactions, onSeeMore }: RecentIncomeProps) => {
   return (
-    <div className="card">
+    <div className="relative right-6 md:w-full! card">
       <div className="flex items-center justify-between">
         <h5 className="text-xl">Income</h5>
         <button className="card-btn" onClick={onSeeMore}>

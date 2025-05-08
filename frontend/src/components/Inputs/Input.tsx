@@ -28,7 +28,9 @@ const Input = ({
 
   return (
     <div>
-      <label className={`text-[16px]  text-slate-800 ${labelclassName}`}>
+      <label
+        className={`text-xs md:text-[16px]  text-slate-800 ${labelclassName}`}
+      >
         {label}
       </label>
       <div className={`input-box  ${inputclassName}`}>
@@ -39,7 +41,7 @@ const Input = ({
           onChange={onChange}
           value={value}
           placeholder={placeholder}
-          className={`w-full h-full outline-none `}
+          className={`w-full h-full outline-none placeholder:text-xs placeholder:md:text-[16px] `}
         />
 
         {type === "password" && (

@@ -16,7 +16,11 @@ const CustomBarChart = ({ data }: any) => {
   };
   return (
     <div className="bg-whtie mt-6">
-      <ResponsiveContainer width="100%" height={350}>
+      <ResponsiveContainer
+        width="100%"
+        height={350}
+        className="overflow-x-auto max-md:-ml-9 max-md:w-screen! max-md:h-[320px]! md:h-[350px] "
+      >
         <BarChart data={data}>
           <CartesianGrid stroke="none" />
           <XAxis

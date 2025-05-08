@@ -29,7 +29,9 @@ const Last30DaysExpenses = ({
   return (
     <div className="card col-span-1 mt-4">
       <div className="flex items-center justify-between mb-8">
-        <h5 className="text-2xl">Income v/s Expense Analysis</h5>
+        <h5 className="max-md:text-lg md:text-2xl">
+          Income v/s Expense Analysis
+        </h5>
       </div>
       <MyLineChart
         data={incomeChartData}
@@ -37,7 +39,7 @@ const Last30DaysExpenses = ({
         offsetColor={"#ab8df8"}
       />
       <div className="flex items-center justify-center mb-8">
-        <h5 className="text-lg">
+        <h5 className="max-md:text-sm md:text-lg">
           Income This Month{" "}
           <LuTrendingUp className="size-8 mb-1 ml-3 inline text-green-500" />
         </h5>
@@ -50,7 +52,7 @@ const Last30DaysExpenses = ({
       />
 
       <div className="flex items-center justify-center ">
-        <h5 className="text-lg">Expenses This Month</h5>
+        <h5 className="max-md:text-sm text-lg">Expenses This Month</h5>
         <LuTrendingDown className="size-8 mb-1 ml-3 inline text-red-500" />
       </div>
     </div>

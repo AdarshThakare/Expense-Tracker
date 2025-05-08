@@ -14,12 +14,12 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
       >
         <img src={finlogin} alt="Login hero image" className="size-full" />
       </motion.div>
-      <div className="w-screen h-screen md:w-[60vw] ps-12 pt-8 pb-12">
+      <div className="w-screen h-screen md:w-[60vw] pt-8 pb-12">
         <motion.h2
           initial={{ opacity: 0, y: -32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, ease: easeInOut }}
-          className="text-2xl font-mono font-bold text-black"
+          className="ms-12 text-2xl font-mono font-bold text-black"
         >
           <span className="text-purple-500">EXPENSE</span>💰TRACKER
         </motion.h2>

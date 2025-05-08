@@ -12,7 +12,7 @@ const ExpenseTransactions = ({
   onSeeMore,
 }: ExpenseTransactionsProps) => {
   return (
-    <div className="card">
+    <div className="md:w-full! card">
       <div className="flex items-center justify-between">
         <h5 className="text-xl">Expenses</h5>
         <button className="card-btn" onClick={onSeeMore}>

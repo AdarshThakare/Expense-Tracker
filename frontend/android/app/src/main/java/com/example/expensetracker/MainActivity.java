@@ -1,4 +1,4 @@
-package com.render.expensetracker44;
+package com.example.expensetracker;
 
 import com.getcapacitor.BridgeActivity;
 

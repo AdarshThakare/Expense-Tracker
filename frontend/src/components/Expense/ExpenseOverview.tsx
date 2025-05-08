@@ -20,17 +20,18 @@ const ExpenseOverview = ({
 
   return (
     <div className="card">
-      <div className="flex items-center justify-between">
-        <div className="">
-          <h5 className="text-xl">Expense Overview</h5>
-          <p className="text-md text-gray-400 mt-0.5">
-            Track your earnings over time and analyse your expense trends.
-          </p>
+      <div>
+        <div className="flex items-center justify-between">
+          <h5 className="max-md:text-lg md:text-xl">Expense Overview</h5>
+          <button className="add-btn" onClick={onAddExpense}>
+            <LuPlus className="text-xl" />
+            Add Expense
+          </button>
         </div>
-        <button className="add-btn" onClick={onAddExpense}>
-          <LuPlus className="text-xl" />
-          Add Expense
-        </button>
+
+        <p className="max-md:text-xs md:text-md text-gray-400 mt-3">
+          Track your earnings over time and analyse your expense trends.
+        </p>
       </div>
 
       <div className="mt-10">

@@ -8,11 +8,14 @@ import axiosInstance from "../../utils/axios";
 import { API_PATHS } from "../../utils/api";
 import { UserContext } from "../../context/userContext";
 import uploadImage from "../../utils/uploadImage";
-import { easeInOut, motion } from "framer-motion";
+import { easeInOut, easeOut, motion } from "framer-motion";
+import finlogin from "../../assets/images/finlogin.png";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState<string | null>(null);
   const [fullName, setFullName] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,6 +33,7 @@ const SignUp = () => {
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     let profileImageUrl = "";
     e.preventDefault();
+    setLoading(true);
 
     if (!fullName) {
       setError("Please enter your name");
@@ -71,9 +75,9 @@ const SignUp = () => {
     } catch (err) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
-      } else {
-        setError("Something went wrong. Please try again later");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,10 +92,12 @@ const SignUp = () => {
           ease: easeInOut,
           duration: 0.5,
         }}
-        className="lg:w-[80%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center"
+        className="ms-8 mt-10 md:mt-0 md:ms-12 w-[80%] h-fit md:h-full flex flex-col justify-start md:justify-center"
       >
-        <h3 className="text-3xl font-semibold text-black">Create an Account</h3>
-        <p className="text-xl text-slate-700 mt-[5px] mb-8">
+        <h3 className="text-xl md:text-3xl font-semibold text-black">
+          Create an Account
+        </h3>
+        <p className="text-sm md:text-xl text-slate-700 mt-[5px] mb-8">
           Join us today by entering your details below.{" "}
         </p>
 
@@ -124,20 +130,40 @@ const SignUp = () => {
               placeholder="password"
               type="password"
             />
-          </div>
-          {error && <p className="text-red-500 text-sm pb-1 pt-3">{error}</p>}
+            {loading && (
+              <p className="text-gray-500 text-xs md:text-sm mt-2 pb-2.5">
+                Fetching details...
+              </p>
+            )}
 
+            {!loading && error && (
+              <p className="text-red-500 text-xs md:text-sm mt-2 pb-2.5">
+                {error}
+              </p>
+            )}
+          </div>
           <button type="submit" className="btn-primary">
             SIGNUP
           </button>
 
-          <p className="text-[16px] text-slate-800 mt-3">
+          <p className="text-sm md:text-[16px] text-slate-800 mt-3">
             Already have an account?{" "}
             <Link className="font-medium text-primary underline" to="/login">
               Login
             </Link>
           </p>
         </form>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: easeOut, delay: 1, duration: 0.3 }}
+      >
+        <img
+          src={finlogin}
+          alt="Login hero image"
+          className="w-full md:hidden"
+        />
       </motion.div>
     </AuthLayout>
   );
