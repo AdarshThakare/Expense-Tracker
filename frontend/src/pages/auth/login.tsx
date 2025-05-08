@@ -6,7 +6,7 @@ import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axios";
 import { API_PATHS } from "../../utils/api";
 import { UserContext } from "../../context/userContext";
-
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -59,43 +59,57 @@ const Login = () => {
   };
   return (
     <AuthLayout>
-      <div className="lg:w-[80%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-3xl font-semibold text-black">Welcome Back! 👋</h3>
-        <p className="text-xl text-slate-700 mt-[5px] mb-10">
-          Please enter your details to Login
-        </p>
-
-        <form onSubmit={handleLogin}>
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            label="Email Address"
-            placeholder="john@example.com"
-            type="text"
-          />
-          <br />
-          <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            label="Password"
-            placeholder="password"
-            type="password"
-          />
-
-          {error && <p className="text-red-500 text-sm pb-2.5">{error}</p>}
-
-          <button type="submit" className="btn-primary">
-            LOGIN
-          </button>
-
-          <p className="text-[16px] text-slate-800 mt-3">
-            Don't have an account?{" "}
-            <Link className="font-medium text-primary underline" to="/signup">
-              SignUp
-            </Link>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            delay: 0.5,
+            staggerChildren: 0.2,
+            ease: easeInOut,
+            duration: 0.5,
+          }}
+          className="lg:w-[80%] h-3/4 md:h-full flex flex-col justify-center"
+        >
+          <h3 className="text-3xl font-semibold text-black">
+            Welcome Back! 👋
+          </h3>
+          <p className="text-xl text-slate-700 mt-[5px] mb-10">
+            Please enter your details to Login
           </p>
-        </form>
-      </div>
+
+          <form onSubmit={handleLogin}>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Email Address"
+              placeholder="john@example.com"
+              type="text"
+            />
+            <br />
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              label="Password"
+              placeholder="password"
+              type="password"
+            />
+
+            {error && <p className="text-red-500 text-sm pb-2.5">{error}</p>}
+
+            <button type="submit" className="btn-primary">
+              LOGIN
+            </button>
+
+            <p className="text-[16px] text-slate-800 mt-3">
+              Don't have an account?{" "}
+              <Link className="font-medium text-primary underline" to="/signup">
+                SignUp
+              </Link>
+            </p>
+          </form>
+        </motion.div>
+      </AnimatePresence>
     </AuthLayout>
   );
 };

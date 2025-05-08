@@ -54,7 +54,7 @@ const SideMenu = ({ activeMenu }: CommonProps) => {
       {SIDE_MENU_DATA.map((item, index) => (
         <button
           key={index}
-          className={`w-full flex items-center gap-4 text-[16px] ${
+          className={`w-full flex items-center gap-4 text-[16px]  ${
             activeMenu == item.label ? "text-white bg-primary" : ""
           } py-3 ps-6 rounded-tl-lg rounded-bl-lg my-2 `}
           onClick={() => handleClick(item.path)}

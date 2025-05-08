@@ -10,11 +10,13 @@ import DeleteAlert from "../../components/Income/DeleteAlert";
 import ExpenseOverview from "../../components/Expense/ExpenseOverview";
 import ExpenseList from "../../components/Expense/ExpenseList";
 import AddExpenseForm from "../../components/Expense/AddExpenseForm";
+import { easeInOut, motion } from "framer-motion";
+import { Audio } from "react-loader-spinner";
 
 const Expense = () => {
   useUserAuth();
   const [expenseData, setExpenseData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -24,7 +26,6 @@ const Expense = () => {
 
   //Get All Expense Details
   const fetchExpenseDetails = async () => {
-    if (loading) return;
     try {
       const response = await axiosInstance.get(
         `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`
@@ -128,8 +129,18 @@ const Expense = () => {
 
   return (
     <DashboardLayout activeMenu="Expense">
-      {user && (
-        <div className="my-5 mx-auto">
+      {!loading && user && (
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            delay: 0.2,
+            staggerChildren: 0.2,
+            ease: easeInOut,
+            duration: 0.2,
+          }}
+          className="my-5 mx-auto"
+        >
           <div className="grid grid-cols-1 gap-6">
             <div className="">
               <ExpenseOverview
@@ -167,6 +178,18 @@ const Expense = () => {
               onDelete={() => deleteExpense(openDeleteAlert.data)}
             />
           </Modal>
+        </motion.div>
+      )}
+      {loading && (
+        <div className="flex flex-col items-center justify-center w-full h-screen pb-30">
+          <Audio height="80" width="80" color="#875cf5" ariaLabel="loading" />
+          <motion.h3
+            animate={{ opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="text-xl font-mono mt-4 ml-5"
+          >
+            LOADING...
+          </motion.h3>
         </div>
       )}
     </DashboardLayout>

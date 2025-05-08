@@ -8,6 +8,7 @@ import axiosInstance from "../../utils/axios";
 import { API_PATHS } from "../../utils/api";
 import { UserContext } from "../../context/userContext";
 import uploadImage from "../../utils/uploadImage";
+import { easeInOut, motion } from "framer-motion";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState<string | null>(null);
@@ -78,7 +79,17 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      <div className="lg:w-[80%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          delay: 0.5,
+          staggerChildren: 0.2,
+          ease: easeInOut,
+          duration: 0.5,
+        }}
+        className="lg:w-[80%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center"
+      >
         <h3 className="text-3xl font-semibold text-black">Create an Account</h3>
         <p className="text-xl text-slate-700 mt-[5px] mb-8">
           Join us today by entering your details below.{" "}
@@ -127,7 +138,7 @@ const SignUp = () => {
             </Link>
           </p>
         </form>
-      </div>
+      </motion.div>
     </AuthLayout>
   );
 };

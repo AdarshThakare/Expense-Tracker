@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import IncomeList from "../../components/Income/IncomeList";
 import DeleteAlert from "../../components/Income/DeleteAlert";
 import useUserAuth from "../../hooks/useUserAuth";
+import { easeInOut, motion } from "framer-motion";
+import { Audio } from "react-loader-spinner";
 
 const Income = () => {
   useUserAuth();
@@ -24,7 +26,7 @@ const Income = () => {
 
   //Get All Income Details
   const fetchIncomeDetails = async () => {
-    if (loading) return;
+    setLoading(true);
     try {
       const response = await axiosInstance.get(
         `${API_PATHS.INCOME.GET_ALL_INCOME}`
@@ -41,8 +43,6 @@ const Income = () => {
   };
 
   useEffect(() => {
-    console.log("RUNNING");
-
     fetchIncomeDetails();
     return () => {};
   }, []);
@@ -130,8 +130,18 @@ const Income = () => {
 
   return (
     <DashboardLayout activeMenu="Income">
-      {user && (
-        <div className="my-5 mx-auto">
+      {!loading && user && (
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            delay: 0.2,
+            staggerChildren: 0.2,
+            ease: easeInOut,
+            duration: 0.2,
+          }}
+          className="my-5 mx-auto"
+        >
           <div className="grid grid-cols-1 gap-6">
             <div className="">
               <IncomeOverview
@@ -169,6 +179,18 @@ const Income = () => {
               onDelete={() => deleteIncome(openDeleteAlert.data)}
             />
           </Modal>
+        </motion.div>
+      )}
+      {loading && (
+        <div className="flex flex-col items-center justify-center w-full h-screen pb-30">
+          <Audio height="80" width="80" color="#875cf5" ariaLabel="loading" />
+          <motion.h3
+            animate={{ opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="text-xl font-mono mt-4 ml-5"
+          >
+            LOADING...
+          </motion.h3>
         </div>
       )}
     </DashboardLayout>
